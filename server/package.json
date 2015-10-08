@@ -1,0 +1,25 @@
+{
+  "name": "wege-server",
+  "description": "Server for the Wege Application",
+  "version": "0.0.1",
+  "main": "server.js",
+  "repository": "",
+  "author": "Mikel Corcuera <mik.corcuera@gmail.com>",
+  "dependencies": {
+    "restify": "~2.0",
+    "async": "~0.2.8",
+    "socket.io": "~0.9.14",
+    "extend": "~3.0.0",
+    "bunyan": "~1.5.0",
+    "callsite": "~1.0.0",
+    "sinon": ""
+  },
+  "devDependencies": {
+    "chai": "~3.3.0",
+    "sinon": "~1.17.1"
+  },
+  "scripts": {
+    "start": "node app/server.js | ./node_modules/.bin/bunyan",
+    "test": "mocha test/"
+  }
+}
