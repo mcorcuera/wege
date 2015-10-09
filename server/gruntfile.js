@@ -1,22 +1,22 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-      pkg: grunt.file.readJSON('package.json'),
+     pkg: grunt.file.readJSON('package.json'),
       
     copy: {
       build: {
         cwd: '<%= pkg.src %>',
         src: [ '**' ],
-        dest: 'dist',
+        dest: '<%= pkg.buildDir %>',
         expand: true
       },
     }, 
     clean: {
       build: {
-        src: [ 'dist' ]
+        src: [ '<%= pkg.buildDir %>' ]
       }
     },
     jshint: {
-        files: ['gruntfile.js', 'app/*.js'],
+        files: ['gruntfile.js', '<%= pkg.src %>/**/*.js'],
 		options: grunt.file.readJSON('jshint.conf.json')
     },
     simplemocha: {
@@ -24,18 +24,51 @@ module.exports = function(grunt) {
 			timeout: 3000,
 			ignoreLeaks: false,
 		},
-		all: { src: ['test/*.js'] }
+		all: { src: ['<%= pkg.testSrc %>/**/*.js'] }
+	},
+	watch: {
+	    app: {
+	        files: ['gruntfile.js', '<%= pkg.src %>/**/*.js'],
+	        tasks: ['jshint', 'simplemocha']
+	    },
+	    test: {
+	        files: ['<%= pkg.testSrc %>/**/*.js'],
+	        tasks: ['simplemocha']
+	    }
+	},
+	shell: {
+	    debug: {
+	        command: 'node <%= pkg.main %> | ./node_modules/.bin/bunyan',
+	        options: {
+	            stdout: true,
+	            stderr: true
+	        }
+	    }
 	}
   });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-simple-mocha');
+    grunt.loadNpmTasks('grunt-contrib-watch');  
+    grunt.loadNpmTasks('grunt-shell');
+
    
+    grunt.registerTask('test',
+    ['simplemocha']);
+    
     grunt.registerTask(
       'build', 
       'Checks code standars, tests, and copies' + 
       'the files to the build directory.', 
-      ['clean', 'simplemocha', 'jshint', 'copy' ]
+      ['clean', 'jshint', 'test', 'copy' ]
     );
+    
+    grunt.registerTask(
+        'default',
+        ['build', 'watch']
+    );
+    
+    grunt.registerTask('debug',
+    ['shell:debug']);
 };

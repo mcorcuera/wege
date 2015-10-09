@@ -4,16 +4,19 @@
   "version": "0.0.1",
   "main": "app/server.js",
   "src": "app/",
+  "testSrc": "test/",
+  "buildDir": "dist",
   "repository": "",
   "author": "Mikel Corcuera <mik.corcuera@gmail.com>",
   "dependencies": {
-    "restify": "~2.0",
     "async": "~0.2.8",
-    "socket.io": "~0.9.14",
-    "extend": "~3.0.0",
     "bunyan": "~1.5.0",
     "callsite": "~1.0.0",
-    "sinon": ""
+    "extend": "~3.0.0",
+    "restify": "~2.0",
+    "sinon": "",
+    "socket.io": "~0.9.14",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "~3.3.0",
@@ -23,8 +26,10 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-nodeunit": "~0.4.1",
     "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-mocha-test": "^0.12.7",
     "grunt-nodemon": "~0.3.0",
+    "grunt-shell": "^1.1.2",
     "grunt-simple-mocha": "^0.4.0",
     "sinon": "~1.17.1"
   },
