@@ -1,0 +1,14 @@
+{
+	"maxlen": 80,
+	"quotmark": "single",
+	"unused": true,
+	"undef": true,
+	"eqnull": true,
+	"curly": true,
+	"freeze": true,
+	"noarg": true,
+	"globals": {
+	    "module": true,
+	    "require": true
+	}
+}
