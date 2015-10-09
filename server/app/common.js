@@ -6,7 +6,7 @@ var fs = require('fs');
 module.exports = {
   requireFolder : _requireFolder,
   extend : _extend
-}
+};
 
 function _requireFolder( folder) {
   var namespace = {};
@@ -15,7 +15,7 @@ function _requireFolder( folder) {
 
   fs.readdirSync(relativePath).forEach(function (file) {
     if (file.indexOf('.js') != -1) {
-        namespace[file.split('.')[0]] = require(relativePath + '/' + file)
+        namespace[file.split('.')[0]] = require(relativePath + '/' + file);
     }
   });
   return namespace;
