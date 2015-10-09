@@ -1,5 +1,4 @@
 var common = require('./common');
-var restify = require( 'restify');
 
 module.exports = RestResource;
 

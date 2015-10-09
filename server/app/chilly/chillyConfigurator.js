@@ -6,9 +6,8 @@ function ChillyConfigurator( restifyServer) {
   this.restifyServer = restifyServer;
 }
 
-ChillyConfigurator.prototype.registerResources( resources) {
+ChillyConfigurator.prototype.registerResources = function( resources) {
   if( !util.isArray( resources)) {
     resources = [resources];
   }
-  
-}
+};

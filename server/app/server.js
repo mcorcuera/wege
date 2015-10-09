@@ -1,7 +1,7 @@
 
 var bunyan      = require('bunyan');
 var restify     = require('restify');
-var util        = require('util');
+var _           = require('underscore');
 var common      = require('./common');
 var resources   = common.requireFolder('./resources');
 
@@ -16,7 +16,6 @@ var server = restify.createServer( {
 var log = server.log;
 var baseUrl = '/api';
 log.info( 'Configuring Restify server with at ' + baseUrl);
-
 
 log.info( 'Registering resources');
 
@@ -38,7 +37,7 @@ function registerResourceMethod( resource, defaultAuthenticator) {
       var resourceMethod = resource[method];
       var handler;
       var authenticator;
-      if( util.isFunction( resourceMethod)) {
+      if( _.isFunction( resourceMethod)) {
         handler = resourceMethod;
       }else {
         handler = resourceMethod.handler;
@@ -47,7 +46,6 @@ function registerResourceMethod( resource, defaultAuthenticator) {
       server[method]( baseUrl + resource.path,
                       defaultAuthenticator || authenticator,
                       handler);
-
       log.info( 'Registered ' + method + ' for ' + resource.path);
     }
   };

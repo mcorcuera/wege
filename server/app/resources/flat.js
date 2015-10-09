@@ -9,7 +9,6 @@ var FlatResource = RestResource.extend( {
       return next();
     }
   }
-})
-
+});
 
 module.exports = FlatResource;
