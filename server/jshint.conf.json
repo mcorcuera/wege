@@ -9,6 +9,8 @@
 	"noarg": true,
 	"globals": {
 	    "module": true,
-	    "require": true
+	    "require": true,
+			"console": true,
+			"process": true
 	}
 }

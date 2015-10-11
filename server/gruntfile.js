@@ -6,7 +6,7 @@ module.exports = function(grunt) {
           src: 'package.json',
           dest: '<%= pkg.buildDir %>'
         },
-      },  
+      },
     copy: {
       build: {
         cwd: '<%= pkg.src %>',
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         dest: '<%= pkg.buildDir %>',
         expand: true
       },
-    }, 
+    },
     clean: {
       build: {
         src: [ '<%= pkg.buildDir %>' ]
@@ -55,26 +55,27 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-simple-mocha');
-    grunt.loadNpmTasks('grunt-contrib-watch');  
-    grunt.loadNpmTasks('grunt-contrib-watch');  
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-package-modules');
 
-   
+
     grunt.registerTask('test',
     ['simplemocha']);
-    
+
     grunt.registerTask(
-      'build', 
-      'Checks code standars, tests, and copies' + 
-      'the files to the build directory.', 
+      'build',
+      'Checks code standars, tests, and copies' +
+      'the files to the build directory.',
       ['clean', 'jshint', 'test', 'copy', 'packageModules' ]
     );
-    
+
     grunt.registerTask(
         'default',
         ['build', 'watch']
     );
-    
+
     grunt.registerTask('debug',
     ['shell:debug']);
 };
