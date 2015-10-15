@@ -60,7 +60,17 @@ module.exports = function(grunt) {
               reportFormats: ['cobertura','lcovonly']
           }
       }
-    }
+    },
+    coveralls: {
+      options: {
+        force: true
+      },
+  
+      your_target: {
+        // LCOV coverage file (can be string, glob or array)
+        src: '<%= pkg.reports %>/coverage/*.info'
+      },
+    },
     
   });
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -72,7 +82,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-package-modules');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
-
+    grunt.loadNpmTasks('grunt-coveralls');
 
     grunt.registerTask('test',
     ['mocha_istanbul:coveralls']);
