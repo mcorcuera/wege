@@ -1,7 +1,7 @@
 var RestResource = require( '../restResource');
 
 var FlatResource = RestResource.extend( {
-  path: '/echo/:name',
+  path: "/echo/:name",
 
   get: {
     handler: function( req, res, next) {
