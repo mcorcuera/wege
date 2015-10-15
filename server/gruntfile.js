@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     },
     clean: {
       build: {
-        src: [ '<%= pkg.buildDir %>' ]
+        src: [ '<%= pkg.buildDir %>', '<%= pkg.reports %>' ]
       }
     },
     jshint: {
@@ -25,10 +25,10 @@ module.exports = function(grunt) {
 		options: grunt.file.readJSON('jshint.conf.json')
     },
     simplemocha: {
-		options: {
-			timeout: 3000,
-			ignoreLeaks: false,
-		},
+  		options: {
+  			timeout: 3000,
+  			ignoreLeaks: false,
+  		},
 		all: { src: ['<%= pkg.testSrc %>/**/*.js'] }
 	},
 	watch: {
@@ -49,7 +49,19 @@ module.exports = function(grunt) {
 	            stderr: true
 	        }
 	    }
-	}
+	},
+	mocha_istanbul: {
+      coveralls: {
+          src: ['test'],
+          options: {
+              coverageFolder: '<%= pkg.reports %>/coverage',
+              coverage:false, 
+              root: './<%= pkg.src %>',
+              reportFormats: ['cobertura','lcovonly']
+          }
+      }
+    }
+    
   });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -59,10 +71,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-package-modules');
+    grunt.loadNpmTasks('grunt-mocha-istanbul');
 
 
     grunt.registerTask('test',
-    ['simplemocha']);
+    ['mocha_istanbul:coveralls']);
 
     grunt.registerTask(
       'build',
