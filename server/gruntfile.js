@@ -55,9 +55,10 @@ module.exports = function(grunt) {
           src: ['test'],
           options: {
               coverageFolder: '<%= pkg.reports %>/coverage',
-              coverage:false, 
+              coverage:false,
               root: './<%= pkg.src %>',
-              reportFormats: ['cobertura','lcovonly']
+              reportFormats: ['cobertura','lcovonly'],
+              istanbulOptions:['--include-all-sources']
           }
       }
     },
@@ -65,13 +66,13 @@ module.exports = function(grunt) {
       options: {
         force: true
       },
-  
+
       your_target: {
         // LCOV coverage file (can be string, glob or array)
         src: '<%= pkg.reports %>/coverage/*.info'
       },
     },
-    
+
   });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
